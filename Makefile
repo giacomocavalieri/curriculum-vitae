@@ -14,4 +14,3 @@ generate = pandoc -t html5 ${pdf_options} \
 
 generate_pdf: style.css ${input_file}
 	${generate}
-	${generate}
