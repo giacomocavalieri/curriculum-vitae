@@ -1,0 +1,34 @@
+name: Build curriculum pdf from markdown file and publish it
+on:
+  push:
+    paths-ignore:
+      - README.md
+  workflow_dispatch:
+
+jobs:
+  build-md:
+    runs-on: macos-12
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+      - name: Install wkhtmltopdf
+        run: brew install --cask formulae/wkhtmltopdf.rb
+      - name: Install pandoc
+        run: brew install formulae/pandoc.rb
+      - name: Create pdf
+        run: make
+      - name: Generate tag
+        uses: DanySK/semver-autotag-action@0.1.0
+      - name: Release curriculum
+        shell: bash
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          if [[ -z ${GITHUB_TOKEN} ]]; then
+            echo "No token found... unable to deploy"
+            false
+          else
+            TAG=$(git describe --tags --exact-match HEAD)
+            hub release create -m "$(git tag -l --format='%(contents)' "$TAG")" "$TAG" || true
+            gh release upload "$TAG" *.pdf --clobber
+          fi
