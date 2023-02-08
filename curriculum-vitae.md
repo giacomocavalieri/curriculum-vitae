@@ -15,6 +15,11 @@ Studente di Ingegneria e Scienze Informatiche
 _Aprile 2021 - Luglio 2021_
 __Realizzazione della web app Ca' Foscari Jisho Web__
 
+### Università di Bologna - Cesena
+
+_Marzo 2022 - Settembre 2022_
+__Tutor didattico per il corso di Basi di Dati del percorso di Laurea Triennale in Ingegneria e Scienze Informatiche__
+
 ## Istruzione
 
 ### Università di Bologna - Cesena
@@ -41,6 +46,6 @@ Diplomato con votazione 100L
 
 ## Competenze
 
-Tecniche: `Haskell` `Scala 3` `Scala 2` `Java 11` `C# 9.0` `Python 3` `JavaScript` `TypeScript` `SQL` `C`
+Tecniche: `Haskell` `Scala 3` `Scala 2` `Clojure` `Java 11` `C# 9.0` `Python 3` `JavaScript` `TypeScript` `SQL` `C`
 
 Linguistiche: `italiano - madrelingua` `inglese - C1`
