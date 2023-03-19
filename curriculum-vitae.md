@@ -24,8 +24,9 @@ __Tutor didattico per il corso di Basi di Dati del percorso di Laurea Triennale 
 
 ### Università di Bologna - Cesena
 
-_2020 - in corso_
+_2020 - 2023_
 __Laurea Magistrale in Ingegneria e Scienze Informatiche__
+Laureato con votazione 110L con tesi "Gestione degli effetti in linguaggi di programmazione funzionale: tecniche di modellazione e interpretazione"
 
 ### Università di Bologna - Cesena
 
