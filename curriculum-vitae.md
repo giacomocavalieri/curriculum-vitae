@@ -2,7 +2,7 @@
 
 <div class="contact-info">
 - Email: [giacomo.cavalieri@icloud.com](mailto:giacomo.cavalieri@icloud.com)
-- Telefono: __+39 3452446512__
+- Telefono: __+39 345 2446512__
 - GitHub: [giacomocavalieri](https://github.com/giacomocavalieri)
 </div>
 
