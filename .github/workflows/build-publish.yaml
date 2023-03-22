@@ -7,16 +7,20 @@ on:
 
 jobs:
   build-md:
-    runs-on: macos-12
+    runs-on: ubuntu-22.04
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
-      - name: Install wkhtmltopdf
-        run: brew install wkhtmltopdf
-      - name: Install pandoc
-        run: brew install pandoc
-      - name: Create pdf
-        run: make
+      - name: md to html
+        uses: docker://pandoc/core:3.1
+        with: 
+          args: -s curriculum-vitae.md -c style.css -o curriculum-vitae.html
+      - name: html to pdf
+        uses: LukaszLapaj/html-to-pdf-action@master
+        with:
+          htmlFile: curriculum-vitae.html
+          outputFile: curriculum-vitae.pdf
+          pdfOptions: '{"format": "A4", "margin": {"top": "10mm", "left": "10mm", "right": "10mm", "bottom": "10mm"}}'
       - name: Generate tag
         uses: DanySK/semver-autotag-action@0.1.0
       - name: Release curriculum
