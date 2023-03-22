@@ -7,14 +7,15 @@ on:
 
 jobs:
   build-md:
-    runs-on: macos-12
+    runs-on: ubuntu-22.04
+    container: pandoc/core:3.1.1
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
-      - name: Install wkhtmltopdf
-        run: brew install --cask formulae/wkhtmltopdf.rb
-      - name: Install pandoc
-        run: brew install formulae/pandoc.rb
+#      - name: Install wkhtmltopdf
+#        run: brew install --cask formulae/wkhtmltopdf.rb
+#      - name: Install pandoc
+#        run: brew install formulae/pandoc.rb
       - name: Create pdf
         run: make
       - name: Generate tag
