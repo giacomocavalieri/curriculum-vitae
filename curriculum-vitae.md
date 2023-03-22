@@ -1,7 +1,5 @@
 # Giacomo Cavalieri
 
-Studente di Ingegneria e Scienze Informatiche
-
 <div class="contact-info">
 - Email: [giacomo.cavalieri@icloud.com](mailto:giacomo.cavalieri@icloud.com)
 - Telefono: __+39 3452446512__
