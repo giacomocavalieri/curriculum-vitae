@@ -11,28 +11,32 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
-      - name: md to html
-        uses: docker://pandoc/core:3.1
-        with: 
-          args: -s curriculum-vitae.md -c style.css -o curriculum-vitae.html
-      - name: html to pdf
-        uses: LukaszLapaj/html-to-pdf-action@master
+      - name: Install Typst
+        run: |
+          TYPSTDIR="typst-x86_64-unknown-linux-gnu"
+          TYPSTURL="https://github.com/typst/typst/releases/download/v23-03-21-2/typst-x86_64-unknown-linux-gnu.tar.gz"
+          wget "${TYPSTURL}"
+          tar -xf "${TYPSTDIR}.tar.gz"
+          mv "${TYPSTDIR}/typst" typst
+      - name: Install missing fonts
+        run: |
+          wget -O Source_Sans_Pro.zip "https://fonts.google.com/download?family=Source%20Sans%20Pro"
+          wget -O DM_Serif_Display.zip "https://fonts.google.com/download?family=DM%20Serif%20Display"
+          ls -a
+          unzip -d source_sans_pro/ Source_Sans_Pro.zip
+          unzip -d dm_serif_display/ DM_Serif_Display.zip
+          mv source_sans_pro /usr/share/fonts/
+          mv dm_serif_display /usr/share/fonts/
+          fc-cache -fv
+      - name: Compile PDF
+        run: ./typst curriculum-vitae.typ
+      - name: Get current time
+        id: current-time
+        uses: josStorer/get-current-time@v2
         with:
-          htmlFile: curriculum-vitae.html
-          outputFile: curriculum-vitae.pdf
-          pdfOptions: '{"format": "A4", "margin": {"top": "10mm", "left": "10mm", "right": "10mm", "bottom": "10mm"}}'
-      - name: Generate tag
-        uses: DanySK/semver-autotag-action@0.1.0
+          format: YYYY-MMM-DD(HH.mm.ss)
       - name: Release curriculum
-        shell: bash
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          if [[ -z ${GITHUB_TOKEN} ]]; then
-            echo "No token found... unable to deploy"
-            false
-          else
-            TAG=$(git describe --tags --exact-match HEAD)
-            hub release create -m "$(git tag -l --format='%(contents)' "$TAG")" "$TAG" || true
-            gh release upload "$TAG" *.pdf --clobber
-          fi
+          TAG: ${{ steps.current-time.outputs.formattedTime }}
+        run: hub release create -a curriculum-vitae.pdf -m "Curriculum Vitae" $TAG
