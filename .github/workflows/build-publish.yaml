@@ -29,7 +29,9 @@ jobs:
           mv dm_serif_display /usr/share/fonts/
           fc-cache -fv
       - name: Compile PDF
-        run: ./typst curriculum-vitae.typ
+        run: |
+          ./typst curriculum-vitae-ita.typ
+          ./typst curriculum-vitae-eng.typ
       - name: Get current time
         id: current-time
         uses: josStorer/get-current-time@v2
@@ -39,4 +41,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TAG: ${{ steps.current-time.outputs.formattedTime }}
-        run: hub release create -a curriculum-vitae.pdf -m "Curriculum Vitae" $TAG
+        run: |
+          hub release create -m "Curriculum Vitae" $TAG
+          gh release upload $TAG curriculum-vitae-*.pdf

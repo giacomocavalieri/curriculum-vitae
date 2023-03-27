@@ -1,45 +1,3 @@
-#import "template.typ": *
-
-#let main-color = rgb("#375710")
-#let highlight-color = rgb("#e8efda")
-
-// Shorthands to print entries with nicer field names
-#let work-experience-entry(work) = entry(
-  color: main-color,
-  (
-    title: work.employer,
-    subtitle: work.place,
-    aside: work.date,
-    main-content: work.position,
-    more: if "description" in work.keys() { work.description },
-  ),
-)
-  
-#let education-entry(education) = entry(
-  color: main-color,
-  (
-    title: education.institute,
-    subtitle: education.place,
-    aside: education.date,
-    main-content: education.name,
-    more: if "description" in education.keys() { education.description },
-  ),
-)
-
-#let skills-entry(skill) = [
-  #skill.name: #for skill in skill.skills [
-    #pill(
-      background-color: highlight-color,
-      text(
-        fill: main-color,
-        strong(skill),
-      ),
-    )
-  ]
-]
-
-// All CV data
-
 #let contacts = (
   (name: [Email], content: link("mailto:giacomo.cavalieri@icloud.com")),
   (name: [Telefono], content: link("tel:+39 345 2446512")),
@@ -50,13 +8,13 @@
   (
     employer: [Università di Bologna],
     place: [Cesena],
-    date: [Marzo 2022 - Settembre 2023],
+    date: [marzo 2022 - settembre 2023],
     position: [Tutor didattico per il corso di Basi di Dati del percorso di Laurea Triennale in Ingegneria e Scienze Informatiche],
   ),
   (
     employer: [Università Ca' Foscari Venezia],
     place: [Venezia],
-    date: [Aprile 2021 - Luglio 2021],
+    date: [aprile 2021 - luglio 2021],
     position: [Realizzazione della web app #link("https://jisho.unive.it")[_Ca' Foscari Jisho Web_]],
   ),
 )
@@ -79,7 +37,7 @@
   (
     institute: [Central School of English],
     place: [Londra],
-    date: [Luglio 2017 - Agosto 2017],
+    date: [luglio 2017 - agosto 2017],
     name: [Soggiorno studio],
   ),
   (
@@ -101,30 +59,3 @@
     skills: ("Italiano - madrelingua", "Inglese - C1"),
   ),
 )
-
-#show: doc => cv(
-  main-color: main-color,
-  highlight-color: highlight-color,
-  name: "Giacomo Cavalieri",
-  headshot: "images/headshot.png",
-  contacts: contacts,
-  doc
-)
-
-// Work experience
-#section-title(highlight-color: highlight-color)[Esperienze Professionali]
-#for entry in work-experience-entries {
-  work-experience-entry(entry)
-}
-
-// Education
-#section-title(highlight-color: highlight-color)[Istruzione]
-#for entry in education-entries {
-  education-entry(entry)
-}
-
-// Skills
-#section-title(highlight-color: highlight-color)[Competenze]
-#for entry in skills-entries {
-  box(skills-entry(entry))
-}
