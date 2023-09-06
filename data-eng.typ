@@ -52,7 +52,7 @@
 #let skills-entries = (
   (
     name: [Technical],
-    skills: ("Haskell", "Scala 3", "Scala 2", "Clojure", "Elm", "Java 11", "C# 9.0", "Python 3", "JavaScript", "TypeScript", "SQL", "C"),
+    skills: ("Haskell", "Gleam", "Scala 3", "Scala 2", "Clojure", "Elm", "Java 11", "C# 9.0", "Python 3", "JavaScript", "TypeScript", "SQL", "C"),
   ),
   (
     name: [Languages],
