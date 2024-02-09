@@ -29,12 +29,12 @@ jobs:
       - name: Add a tag
         uses: mathieudutour/github-tag-action@v6.1
         with:
+          tag_prefix: ""
           github_token: ${{ secrets.GITHUB_TOKEN }}
           custom_tag: ${{ steps.current-time.outputs.formattedTime }}
       - name: Release resume
-        uses: softprops/action-gh-release@v1
-        with:
-          files: resume.pdf
-          body: My resume as of ${{ steps.current-time.outputs.formattedTime }}
-          name: Resume ${{ steps.current-time.outputs.formattedTime }}
-          fail_on_unmatched_files: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAG: ${{ steps.current-time.outputs.formattedTime }}
+        run: |
+          gh release create --title "Resume" $TAG resume.pdf
