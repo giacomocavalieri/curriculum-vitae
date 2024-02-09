@@ -11,36 +11,25 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
-      - name: Install Typst
-        run: |
-          TYPSTDIR="typst-x86_64-unknown-linux-gnu"
-          TYPSTURL="https://github.com/typst/typst/releases/download/v23-03-21-2/typst-x86_64-unknown-linux-gnu.tar.gz"
-          wget "${TYPSTURL}"
-          tar -xf "${TYPSTDIR}.tar.gz"
-          mv "${TYPSTDIR}/typst" typst
       - name: Install missing fonts
         run: |
           wget -O Source_Sans_Pro.zip "https://fonts.google.com/download?family=Source%20Sans%20Pro"
-          wget -O DM_Serif_Display.zip "https://fonts.google.com/download?family=DM%20Serif%20Display"
-          ls -a
           unzip -d source_sans_pro/ Source_Sans_Pro.zip
-          unzip -d dm_serif_display/ DM_Serif_Display.zip
           mv source_sans_pro /usr/share/fonts/
-          mv dm_serif_display /usr/share/fonts/
           fc-cache -fv
-      - name: Compile PDF
-        run: |
-          ./typst curriculum-vitae-ita.typ
-          ./typst curriculum-vitae-eng.typ
+      - name: Setup Typst
+        uses: typst-community/setup-typst@v3
+      - name: Compile the resume
+        run: typst compile resume.typ resume.pdf
       - name: Get current time
         id: current-time
         uses: josStorer/get-current-time@v2
         with:
-          format: YYYY-MMM-DD(HH.mm.ss)
-      - name: Release curriculum
+          format: YYYY-MMM-DD
+      - name: Release resume
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TAG: ${{ steps.current-time.outputs.formattedTime }}
         run: |
-          hub release create -m "Curriculum Vitae" $TAG
-          gh release upload $TAG curriculum-vitae-*.pdf
+          hub release create -m "Resume" $TAG
+          gh release upload $TAG resume.pdf
