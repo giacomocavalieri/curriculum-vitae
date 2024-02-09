@@ -13,9 +13,9 @@ jobs:
         uses: actions/checkout@v3
       - name: Install missing fonts
         run: |
-          wget -O Source_Sans_Pro.zip "https://fonts.google.com/download?family=Source%20Sans%20Pro"
-          unzip -d source_sans_pro/ Source_Sans_Pro.zip
-          mv source_sans_pro /usr/share/fonts/
+          wget -O Mona_Sans.zip "https://github.com/github/mona-sans/releases/download/v1.0.1/MonaSans.zip"
+          unzip -d mona_sans/ Mona_Sans.zip
+          mv mona_sans /usr/share/fonts/
           fc-cache -fv
       - name: Setup Typst
         uses: typst-community/setup-typst@v3

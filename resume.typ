@@ -6,7 +6,7 @@
 
 // --- DEFAULT STYLING ---------------------------------------------------------
 
-#set text(font: "Source Sans Pro", fill: font-color)
+#set text(font: "Mona Sans", fill: font-color, size: 0.9em)
 
 /// The main title should be big and bold.
 ///
@@ -260,9 +260,6 @@
     "Work Experience",
     ..work-experience-entries.map(show-work-experience),
   ),
-
-  // This is a hack to put education entirely on a new page!
-  [],
 
   // Education section.
   show-section("Education", ..education-entries.map(show-education))
