@@ -25,11 +25,11 @@ jobs:
         id: current-time
         uses: josStorer/get-current-time@v2
         with:
-          format: YYYY-MMM-DD
+          format: YYYY-MM-DD
       - name: Release resume
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          TAG: ${{ steps.current-time.outputs.formattedTime }}
-        run: |
-          hub release create -m "Resume" $TAG
-          gh release upload $TAG resume.pdf
+        uses: softprops/action-gh-release@v1
+        with:
+          files: resume.pdf
+          body: My resume as of ${{ steps.current-time.outputs.formattedTime }}
+          name: Resume ${{ steps.current-time.outputs.formattedTime }}
+          fail_on_unmatched_files: true
