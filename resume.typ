@@ -122,7 +122,6 @@
 
 #let skills = (
   technical: ("Gleam", "Rust", "Haskell", "Elm", "Scala", "Java", "JavaScript", "Python"),
-  soft: ("Empathy", "Communication", "Documentation"),
   languages: (
     (language: "Italian", level: "native speaker"),
     (language: "English", level: "C1"),
@@ -140,7 +139,7 @@
       Gleam is a statically typed, functional programming language that can be
       compiled to Erlang and JavaScript.
       I am a member of Gleam's core team and I have been regularly contributing
-      the the language compiler.
+      its compiler's development.
     ],
   ),
   (
@@ -230,8 +229,8 @@
 #let introduction = [
   Hello! I am an Italian software developer with a soft spot for functional
   programming languages.\
-  Trying my best to write good and well documented code.\
-  Always striving to treat people with kindness, respect and honesty.
+  I am part of Gleam's core team, and an active contributor to its compiler's
+  development.
 ]
 
 /// --- LAY OUT THE CV ------------------------------------------------
@@ -251,7 +250,6 @@
   show-section(
     "Skills",
     aside("Technical", skills.technical.join(", ")),
-    aside("Soft skills", skills.soft.join(", ")),
     aside("Languages", skills.languages.map(show-language).join(", ")),
   ),
 

@@ -25,7 +25,7 @@ jobs:
         id: current-time
         uses: josStorer/get-current-time@v2
         with:
-          format: YYYY-MM-DD
+          format: YYYY-MM-DD-hh-mm
       - name: Add a tag
         uses: mathieudutour/github-tag-action@v6.1
         with:
